@@ -23,7 +23,7 @@ public class TransactionService {
         Transaction saved = repository.save(transaction);
 
         restTemplate.postForObject(
-                "http://localhost:8082",
+                "https://finflow-demo.onrender.com/api/fraud/analyze",
                 saved,
                 Void.class
         );

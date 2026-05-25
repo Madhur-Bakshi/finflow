@@ -21,7 +21,7 @@ public class FraudController {
         return repository.findAll();
     }
 
-    @PostMapping("/check")
+    @PostMapping("/analyze")
     public void checkFraud(
             @RequestBody Transaction transaction
     ) {
