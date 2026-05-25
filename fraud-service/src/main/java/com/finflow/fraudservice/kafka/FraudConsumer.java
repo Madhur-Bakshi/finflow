@@ -14,39 +14,59 @@ public class FraudConsumer {
     private final FraudAlertRepository repository;
 
     @KafkaListener(
-            topics = "transactions",
-            groupId = "fraud-group"
-    )
-    public void consume(Transaction transaction) {
+        topics = "transactions",
+        groupId = "fraud-group"
+)
+public void consume(Transaction transaction) {
 
-        System.out.println(
-                "Received Transaction: "
-                        + transaction.getMerchant()
-                        + " | Amount: "
-                        + transaction.getAmount()
-        );
+    System.out.println(
+            "Received Transaction: "
+                    + transaction.getMerchant()
+                    + " | Amount: "
+                    + transaction.getAmount()
+    );
 
-        if (transaction.getAmount() > 50000) {
+    String riskLevel;
+    String reason;
 
-            System.out.println(
-                    "FRAUD ALERT: Suspicious Transaction Detected!"
-            );
+    if (transaction.getAmount() >= 1000000) {
 
-            FraudAlert fraudAlert = FraudAlert.builder()
-                    .userId(transaction.getUserId())
-                    .merchant(transaction.getMerchant())
-                    .amount(transaction.getAmount())
-                    .category(transaction.getCategory())
-                    .reason("High transaction amount")
-                    .riskLevel("HIGH")
-                    .timestamp(transaction.getTimestamp())
-                    .build();
+        riskLevel = "CRITICAL";
+        reason = "Extremely high transaction amount";
 
-            repository.save(fraudAlert);
+    } else if (transaction.getAmount() >= 300000) {
 
-            System.out.println(
-                    "Fraud alert saved to MongoDB!"
-            );
-        }
+        riskLevel = "HIGH";
+        reason = "High transaction amount";
+
+    } else if (transaction.getAmount() >= 100000) {
+
+        riskLevel = "MEDIUM";
+        reason = "Moderately high transaction amount";
+
+    } else {
+
+        return;
     }
+
+    System.out.println(
+            "FRAUD ALERT: Suspicious Transaction Detected!"
+    );
+
+    FraudAlert fraudAlert = FraudAlert.builder()
+            .userId(transaction.getUserId())
+            .merchant(transaction.getMerchant())
+            .amount(transaction.getAmount())
+            .category(transaction.getCategory())
+            .reason(reason)
+            .riskLevel(riskLevel)
+            .timestamp(transaction.getTimestamp())
+            .build();
+
+    repository.save(fraudAlert);
+
+    System.out.println(
+            "Fraud alert saved to MongoDB!"
+    );
+   }
 }
