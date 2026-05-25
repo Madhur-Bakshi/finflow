@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const TRANSACTION_API = "http://localhost:8081/api/transactions";
+const TRANSACTION_API = "https://finflow-demo.onrender.com/";
 
-const FRAUD_API = "http://localhost:8082/api/fraud";
+const FRAUD_API = "https://finflow-demo.onrender.com/api/fraud";
 
 export const fetchTransactions = async () => {
   const response = await axios.get(TRANSACTION_API);
