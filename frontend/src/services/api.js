@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const TRANSACTION_API = "https://finflow-1-rkkg.onrender.com/api/transactions";
+const TRANSACTION_API = "https://finflow-1-rkkq.onrender.com/api/transactions";
 
 const FRAUD_API = "https://finflow-demo.onrender.com/api/fraud";
 
