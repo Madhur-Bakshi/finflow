@@ -1,10 +1,10 @@
 package com.finflow.transactionservice.service;
 
 import com.finflow.transactionservice.entity.Transaction;
-import com.finflow.transactionservice.kafka.TransactionProducer;
 import com.finflow.transactionservice.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 public class TransactionService {
 
     private final TransactionRepository repository;
-    private final TransactionProducer producer;
+    private final RestTemplate restTemplate;
 
     public Transaction createTransaction(Transaction transaction) {
 
@@ -22,7 +22,11 @@ public class TransactionService {
 
         Transaction saved = repository.save(transaction);
 
-        producer.publishTransaction(saved);
+        restTemplate.postForObject(
+                "http://localhost:8082",
+                saved,
+                Void.class
+        );
 
         return saved;
     }

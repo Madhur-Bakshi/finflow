@@ -1,4 +1,4 @@
-package com.finflow.fraudservice.kafka;
+/* package com.finflow.fraudservice.kafka;
 
 import com.finflow.fraudservice.dto.Transaction;
 import com.finflow.fraudservice.entity.FraudAlert;
@@ -69,4 +69,4 @@ public void consume(Transaction transaction) {
             "Fraud alert saved to MongoDB!"
     );
    }
-}
+} */
