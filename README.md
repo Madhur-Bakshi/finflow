@@ -1,5 +1,7 @@
 # FinFlow — Real-Time Fraud Detection Dashboard
 
+*A distributed fintech monitoring system built with Spring Boot, Kafka, PostgreSQL, MongoDB, and React.*
+
 A full-stack fintech analytics platform built using a **microservices architecture** to simulate real-time transaction monitoring and fraud detection.
 The system processes transactions through **Apache Kafka**, analyzes suspicious activity using a fraud detection service, and visualizes everything on an interactive dashboard.
 
@@ -17,7 +19,7 @@ Built as a hands-on project to explore distributed systems, event-driven archite
 - Transaction search and filtering
 - Responsive fintech-style UI
 - Dual database architecture using PostgreSQL + MongoDB
-- Dockerized Kafka and Zookeeper setup
+- Docker-based Kafka and Zookeeper setup
 
 ---
 
@@ -31,7 +33,7 @@ The fraud service analyzes incoming transactions and classifies them into risk l
 | ₹300,000 – ₹999,999    | HIGH       |
 | ₹1,000,000 and above   | CRITICAL   |
 
-Fraud alerts are stored separately in MongoDB for fast retrieval and analytics.
+Fraud alerts are stored separately in MongoDB Atlas for fast retrieval and analytics.
 
 ---
 
@@ -64,7 +66,7 @@ Fraud alerts are stored separately in MongoDB for fast retrieval and analytics.
 - Microservices Architecture
 - Event-Driven Architecture
 - Kafka Producer/Consumer Pipeline
-- Dockerized Kafka + Zookeeper
+- Docker-based Kafka and Zookeeper setup
 - Dual Database Architecture
 
 ---
@@ -116,7 +118,11 @@ finflow/
 │
 ├── fraud-service/             # Fraud detection microservice
 │
-├── docker/                    # Kafka & Zookeeper setup
+├── screenshots/               # Project screenshots for README
+│
+├── docker-compose.yml         # Kafka & Zookeeper setup
+│
+├── .gitignore
 │
 └── README.md
 ```
@@ -140,7 +146,7 @@ finflow/
 ## 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Madhur-Bakshi/finflow.git
 cd finflow
 ```
 
